@@ -38,8 +38,7 @@ def register_page():
             # Redirect to the market page or any other page after successful registration
             return redirect(url_for('market'))
     if form.errors:
-        for field, errors in form.errors.items():
-            for error in errors:
-                flash(f'Error in {field}: {error}')
+        for err_msg in form.errors.values():
+            flash(f'There was an error with creating a user: {err_msg}', category='danger')
     context = {'form': form}
     return render_template('register.html', **context)
