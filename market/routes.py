@@ -3,7 +3,7 @@ from flask import render_template,request,flash,redirect,url_for
 from market import app
 from market import db
 from market.models import Item,User
-from market.forms import RegisterForm
+from market.forms import RegisterForm,LoginForm
 
 
 # home page route 
@@ -30,15 +30,34 @@ def register_page():
             new_user = User(
                 username=form.username.data,
                 email_address=form.email_address.data,
-                password_hash=form.password1.data 
             )
+            new_user.set_password(form.password1.data)
             db.session.add(new_user)
             db.session.commit()
             print(f'User {new_user.username} has been created successfully!')
             # Redirect to the market page or any other page after successful registration
+            flash('Account created!', category='success')
             return redirect(url_for('market'))
     if form.errors:
         for err_msg in form.errors.values():
             flash(f'There was an error with creating a user: {err_msg}', category='danger')
     context = {'form': form}
     return render_template('register.html', **context)
+
+
+@app.route('/login',methods=['GET','POST'])
+@app.route('/login_page',methods=['GET','POST'])
+def login_page():
+    form=LoginForm()
+    if request.method == 'POST':
+        username = form.username.data
+        password = form.password.data
+        user = User.query.filter_by(username=username).first()
+        if user and user.check_password(password):
+            flash(f'Welcome back, {user.username}!', category='success')
+            return redirect(url_for('market'))
+        else:
+            flash('Login Unsuccessful. Please check username and password', category='danger')
+
+    context = {'form': form}
+    return render_template('login.html',**context)
