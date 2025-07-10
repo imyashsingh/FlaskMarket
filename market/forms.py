@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,SubmitField,PasswordField
+from wtforms import StringField,SubmitField,PasswordField,TextAreaField
 from wtforms.validators import DataRequired, Length, Email , EqualTo , ValidationError
 
 from market.models import User
@@ -30,4 +30,8 @@ class LoginForm(FlaskForm):
     username= StringField('Username',validators=[DataRequired(), Length(min=2, max=20)])
     password=PasswordField('Password',validators=[DataRequired(), Length(min=6)])
     submit=SubmitField('Login')
-    
+
+class BlogForm(FlaskForm):
+    title = StringField('Blog Name', validators=[DataRequired(), Length(min=2, max=50)])
+    content = TextAreaField('Blog Description', validators=[DataRequired(), Length(min=10, max=1000)])
+    submit = SubmitField('Submit Blog')

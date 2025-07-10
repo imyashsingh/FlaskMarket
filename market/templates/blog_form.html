@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% block title %} Login Page {% endblock %} {% block
+content %}
+<body class="text-center">
+  <div class="container">
+    <form method="POST" class="form-signin" style="color: white">
+      {{ form.hidden_tag() }}
+      <h1 class="h3 mb-3 font-weight-normal">Please Login</h1>
+      <br />
+      {{ form.title.label() }} {{ form.title(class="form-control",
+      placeholder="Blog Name") }} {{ form.content.label() }} {{
+      form.content(class="form-control", placeholder="Enter Your
+      Blog",style="min-height: 400px;") }}
+      <br />
+
+      {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
+    </form>
+  </div>
+</body>
+{% endblock %}
