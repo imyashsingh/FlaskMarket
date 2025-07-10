@@ -32,7 +32,7 @@
       <thead>
         <tr>
           <th scope="col">Blog</th>
-          <th scope="col">Options</th>
+          <th scope="col">Author</th>
         </tr>
       </thead>
       <tbody>
@@ -47,6 +47,10 @@
             </a>
           </td>
           <td>
+            <div>
+              <p>@ {{ blog.owner_user.username }}</p>
+              {# Use the related user object #}
+            </div>
             {% if current_user.id == blog.owner %}
             <div>
               <a
@@ -64,11 +68,6 @@
                   Delete
                 </button>
               </form>
-            </div>
-            {% else %}
-            <div>
-              <p>@ {{ blog.owner_user.username }}</p>
-              {# Use the related user object #}
             </div>
             {% endif %}
           </td>
