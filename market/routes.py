@@ -69,12 +69,18 @@ def logout_page():
 
 
 
-# market page route
 @app.route('/market')
 @app.route('/market_page')
 def market_page():
-    blogs=Blog.query.order_by(Blog.created_at.desc()).all() # Fetch all blogs ordered by creation date
-    return render_template('market.html',blogs=blogs)
+    query = request.args.get('q')
+    if query:
+        blogs = Blog.query.filter(
+            Blog.title.ilike(f"%{query}%") | Blog.content.ilike(f"%{query}%") | Blog.owner.ilike(f"%{query}%")
+        ).order_by(Blog.created_at.desc()).all()
+    else:
+        blogs = Blog.query.order_by(Blog.created_at.desc()).all()
+        
+    return render_template('market.html', blogs=blogs)
 
 @app.route('/blog/<int:blog_id>')
 def blog_detail(blog_id):
