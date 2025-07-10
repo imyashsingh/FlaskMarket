@@ -1,5 +1,4 @@
-from sqlalchemy.sql import func
-from market import db, bcrypt, login_manager  # ✅ Fix spelling: bcrypt not bycrypt
+from market import db, bcrypt, login_manager 
 from flask_login import UserMixin
 
 @login_manager.user_loader
@@ -19,15 +18,3 @@ class User(db.Model, UserMixin):
 
     def check_password(self, password):
         return bcrypt.check_password_hash(self.password_hash, password)
-
-class Blog(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=False)
-    content = db.Column(db.Text, nullable=False)
-    created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
-    updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now())
-
-    owner = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-    def __repr__(self):
-        return f'<Blog {self.name}>'

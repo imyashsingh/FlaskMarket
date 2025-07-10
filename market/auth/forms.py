@@ -30,8 +30,3 @@ class LoginForm(FlaskForm):
     username= StringField('Username',validators=[DataRequired(), Length(min=2, max=20)])
     password=PasswordField('Password',validators=[DataRequired(), Length(min=6)])
     submit=SubmitField('Login')
-
-class BlogForm(FlaskForm):
-    title = StringField('Blog Name', validators=[DataRequired(), Length(min=2, max=50)])
-    content = TextAreaField('Blog Description', validators=[DataRequired(), Length(min=10, max=1000)])
-    submit = SubmitField('Submit Blog')

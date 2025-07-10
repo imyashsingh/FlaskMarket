@@ -16,7 +16,9 @@ block content %}
       <br />
       <div class="checkbox p-2 mb-3">
         <h6>Already have an account?</h6>
-        <a class="btn btn-sm btn-secondary" href="{{ url_for('login_page') }}"
+        <a
+          class="btn btn-sm btn-secondary"
+          href="{{ url_for('auth.login_page') }}"
           >Login</a
         >
       </div>

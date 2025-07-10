@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <a class="navbar-brand" href="{{url_for('home_page')}}">Flask Blogs</a>
+  <a class="navbar-brand" href="{{url_for('auth.home_page')}}">Flask Blogs</a>
   <button
     class="navbar-toggler"
     type="button"
@@ -11,12 +11,12 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" href="{{url_for('home_page')}}"
+        <a class="nav-link" href="{{url_for('auth.home_page')}}"
           >Home <span class="sr-only">(current)</span></a
         >
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{url_for('market_page')}}">Blogs</a>
+        <a class="nav-link" href="{{url_for('blog.market_page')}}">Blogs</a>
       </li>
     </ul>
     <ul class="navbar-nav">
@@ -25,14 +25,16 @@
         <p class="nav-link">Welcome , {{current_user.username}}</p>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{url_for('logout_page')}}">Logout</a>
+        <a class="nav-link" href="{{url_for('auth.logout_page')}}">Logout</a>
       </li>
       {% else %}
       <li class="nav-item">
-        <a class="nav-link" href="{{url_for('login_page')}}">Login</a>
+        <a class="nav-link" href="{{url_for('auth.login_page')}}">Login</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{url_for('register_page')}}">Register</a>
+        <a class="nav-link" href="{{url_for('auth.register_page')}}"
+          >Register</a
+        >
       </li>
       {% endif %}
     </ul>

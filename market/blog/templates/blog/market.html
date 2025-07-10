@@ -4,7 +4,7 @@
     <!-- Create Button -->
     {% if current_user.is_authenticated %}
     <a
-      href="{{ url_for('create_blog') }}"
+      href="{{ url_for('blog.create_blog') }}"
       class="btn btn-outline-success btn-sm"
     >
       Create
@@ -20,7 +20,7 @@
         type="text"
         name="q"
         class="form-control me-2"
-        placeholder="Search blogs by title or content or author"
+        placeholder="Search blogs by title or content"
         value="{{ request.args.get('q', '') }}"
       />
       <button class="btn btn-primary" type="submit">Search</button>
@@ -40,7 +40,7 @@
         <tr>
           <td>
             <a
-              href="{{ url_for('blog_detail', blog_id=blog.id) }}"
+              href="{{ url_for('blog.blog_detail', blog_id=blog.id) }}"
               class="text-decoration-none text-light"
             >
               {{ blog.title }}
@@ -54,13 +54,13 @@
             {% if current_user.id == blog.owner %}
             <div>
               <a
-                href="{{ url_for('edit_blog', blog_id=blog.id) }}"
+                href="{{ url_for('blog.edit_blog', blog_id=blog.id) }}"
                 class="btn btn-outline-info btn-sm"
                 >Edit</a
               >
 
               <form
-                action="{{ url_for('delete_blog', blog_id=blog.id) }}"
+                action="{{ url_for('blog.delete_blog', blog_id=blog.id) }}"
                 method="POST"
                 style="display: inline"
               >
